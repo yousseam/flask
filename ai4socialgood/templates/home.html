@@ -1,21 +1,14 @@
-<!-- templates/base.html -->
+<!-- templates/home.html -->
 {% extends "base.html" %}
 
-{% block title %}AI for Social Good{% endblock %}
-
-{% block head %}
-{{ super() }}
-<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-{% endblock %}
+{% block title %}AI for Social Good - Home{% endblock %}
 
 {% block page_content %}
 <div class="container">
   <div class="page-header">
     <h1>Welcome to the AI for Social Good Website</h1>
   </div>
-  
-  <!-- Updated sections with descriptions below the links -->
+
   <ul>
     <li><h3><a href="/ai4sg/Covid">Covid-19 Daily Trends</a></h3>
       <p>Description: View the latest daily trends of COVID-19 infections and mortality rates.</p>
