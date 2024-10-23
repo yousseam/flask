@@ -1,33 +1,106 @@
+{% extends "bootstrap.html" %}
 
+{% block title %}AI for Social Good{% endblock %}
+
+{% block head %}
+{{ super() }}
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 <style>
     .global-header {
         background-color: #E9282D;
         width: 100%;
         height: 80px;
-
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1;
     }
 
     .global-side-bar {
         background-color: #021D49;
         width: 60px;
-        height: 100%;
-
+        height: calc(100% - 80px); /* Sidebar height adjusted to exclude header */
+        position: fixed;
+        top: 80px; /* Start after the global header */
+        left: 0;
+        z-index: 1;
     }
 
-    .page-header {
-    padding-bottom: 9px;
-    margin: 40px 0 20px;
-    border-bottom: 1px solid #eee;
+    .nav-link {
+        color: white;
+        padding: 20px;
+        text-decoration: none;
     }
 
-    .container {
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
+    .nav-link:hover {
+        background-color: #FF5252;
+    }
+
+    .navbar-brand {
+        color: white;
+        font-size: 24px;
+        text-decoration: none;
+        padding-left: 20px;
+    }
+
+    .navbar-brand:hover {
+        color: #FFC107;
+    }
+
+    .nav-container {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-left: 70px; /* To avoid overlap with the sidebar */
+    }
+
+    /* Adjusting content container to account for sidebar */
+    .content-container {
+        margin-left: 70px; /* Adjusted for the sidebar */
+        margin-top: 100px; /* Adjusted for fixed header */
     }
 </style>
+{% endblock %}
 
-<!--{% extends "bootstrap/base.html" %}-->
+{% block navbar %}
+<!-- global header -->
+<div class="global-header">
+    <div class="navbar-brand">
+        <a class="navbar-brand" href="/ai4sg">AI for Social Good</a>
+    </div>
+    <div class="nav-container">
+        <a class="nav-link" href="/ai4sg" {% if request.path == '/' %}style="background-color: #FF5252;"{% endif %}>Home</a>
+        <a class="nav-link" href="/ai4sg/Covid" {% if request.path == '/Covid' %}style="background-color: #FF5252;"{% endif %}>Infection/Mortality</a>
+        <a class="nav-link" href="/ai4sg/SentimentByPolicy" {% if request.path == '/SentimentByPolicy' %}style="background-color: #FF5252;"{% endif %}>Citizen Concerns by Policy</a>
+        <a class="nav-link" href="/ai4sg/GeneralFakeNews" {% if request.path == '/GeneralFakeNews' %}style="background-color: #FF5252;"{% endif %}>Fake News</a>
+        <a class="nav-link" href="/ai4sg/PolicyMaps" {% if request.path == '/PolicyMaps' %}style="background-color: #FF5252;"{% endif %}>Policy Maps</a>
+        <a class="nav-link" href="/ai4sg/Summarize" {% if request.path == '/Summarize' %}style="background-color: #FF5252;"{% endif %}>Summarize</a>
+    </div>
+</div>
 
-{% block title %}AI for Social Good{% endblock %}
+<!-- global side bar -->
+<div class="global-side-bar"></div>
+
+{% endblock %}
+
+{% block content %}
+<div class="content-container"> <!-- Adjusted for the sidebar and header -->
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {% block page_content %}{% endblock %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{{ moment.include_moment() }}
+{% endblock %}
