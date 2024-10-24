@@ -18,14 +18,15 @@
         top: 0;
         left: 0;
         z-index: 1;
+        font-family: Arial, Helvetica, sans-serif;
     }
 
     .global-side-bar {
         background-color: #021D49;
         width: 60px;
-        height: calc(100% - 80px); /* Sidebar height adjusted to exclude header */
+        height: calc(100% - 80px);
         position: fixed;
-        top: 80px; /* Start after the global header */
+        top: 80px;
         left: 0;
         z-index: 1;
     }
@@ -34,6 +35,7 @@
         color: white;
         padding: 20px;
         text-decoration: none;
+        font-weight: bold;
     }
 
     .nav-link:hover {
@@ -44,7 +46,9 @@
         color: white;
         font-size: 24px;
         text-decoration: none;
-        padding-left: 20px;
+        padding-left: 30px;
+        width: 320px;
+        font-weight: bold;
     }
 
     .navbar-brand:hover {
@@ -52,16 +56,54 @@
     }
 
     .nav-container {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        margin-left: 70px; /* To avoid overlap with the sidebar */
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 0;
+    padding-left: 20px;
+    width: 100%;
     }
 
-    /* Adjusting content container to account for sidebar */
-    .content-container {
-        margin-left: 70px; /* Adjusted for the sidebar */
-        margin-top: 100px; /* Adjusted for fixed header */
+    @media (max-width: 1150px) {
+
+        .global-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .nav-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding-left: 0px;
+            padding-right: 0px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+        }
+
+        .nav-link {
+            padding: 10px;
+            width: 100%;
+            text-align: center
+        }
+
+        .global-header {
+            height: 300px;
+            
+        }
+
+        .global-side-bar {
+            top: 300px;
+        }
+
+        .navbar-brand {
+            text-align: center;
+            padding-left: 0px;
+            padding-right: 0px;
+            padding-top: 30px;
+            padding-bottom: 0px;
+        }
     }
 </style>
 {% endblock %}
@@ -88,19 +130,17 @@
 {% endblock %}
 
 {% block content %}
-<div class="content-container"> <!-- Adjusted for the sidebar and header -->
-    {% for message in get_flashed_messages() %}
-        <div class="alert alert-warning">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            {{ message }}
-        </div>
-    {% endfor %}
+  {% for message in get_flashed_messages() %}
+    <div class="alert alert-warning">
+      {{ message }}
+    </div>
+  {% endfor %}
 
-    {% block page_content %}{% endblock %}
-</div>
+  {% block page_content %}
+  {% endblock %}
 {% endblock %}
 
 {% block scripts %}
-{{ super() }}
-{{ moment.include_moment() }}
+  {{ super() }}
+  {{ moment.include_moment() }}
 {% endblock %}
