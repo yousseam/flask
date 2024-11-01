@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}AI for Social Good{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>Welcome to the AI for Social Good Website</h1>
+</div>
+		<br/>
+		<br/>
+		<ul>
+			<li><h3><a href="/ai4sg/Covid">Covid-19 Daily Trends</a></h3></li>
+			<br/>
+			<li><h3><a href="/ai4sg/SentimentByPolicy">Citizen Concerns Regarding COVID 19 by Policy</a></h3></li>
+			<br/>
+<!--			<li><h3><a href="concern-index/vaccines-2022-03.html">Sample Concerns by Policy / Month</a></h3></li>
+			<br/>
+
+			<li><h3><a href="/ai4sg/FakeNews">Fake COVID News Evaluator (prototype)</a></h3></li>
+			<br/>
+--->			<li><h3><a href="/ai4sg/GeneralFakeNews">Fake News Evaluator (prototype)</a></h3></li>
+			<br/>
+			<li><h3><a href="/ai4sg/PolicyMaps">Policy Maps</a></h3>
+			</li>
+			<br/>
+			<li><h3><a href="/ai4sg/Summarize">Summarizer using ChatGPT</a></h3>
+			</li>
+		</ul>
+{% endblock %}
+
